@@ -4,37 +4,20 @@ type Planet string
 
 const EarthSecondsPerYear = 31557600
 
+var PlanetarySecondsPerYear = map[Planet]float64{
+	"Mercury": 0.2408467 * EarthSecondsPerYear,
+	"Venus":   0.61519726 * EarthSecondsPerYear,
+	"Earth":   EarthSecondsPerYear,
+	"Mars":    1.8808158 * EarthSecondsPerYear,
+	"Jupiter": 11.862615 * EarthSecondsPerYear,
+	"Saturn":  29.447498 * EarthSecondsPerYear,
+	"Uranus":  84.016846 * EarthSecondsPerYear,
+	"Neptune": 164.79132 * EarthSecondsPerYear,
+}
+
 func Age(seconds float64, planet Planet) float64 {
-	if planet == "Mercury" {
-		return seconds / 0.2408467 / EarthSecondsPerYear
-	}
-
-	if planet == "Venus" {
-		return seconds / 0.61519726 / EarthSecondsPerYear
-	}
-
-	if planet == "Earth" {
-		return seconds / 1 / EarthSecondsPerYear
-	}
-
-	if planet == "Mars" {
-		return seconds / 1.8808158 / EarthSecondsPerYear
-	}
-
-	if planet == "Jupiter" {
-		return seconds / 11.862615 / EarthSecondsPerYear
-	}
-
-	if planet == "Saturn" {
-		return seconds / 29.447498 / EarthSecondsPerYear
-	}
-
-	if planet == "Uranus" {
-		return seconds / 84.016846 / EarthSecondsPerYear
-	}
-
-	if planet == "Neptune" {
-		return seconds / 164.79132 / EarthSecondsPerYear
+	if val, exists := PlanetarySecondsPerYear[planet]; exists {
+		return seconds / val
 	}
 
 	return 0
